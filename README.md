@@ -96,4 +96,4 @@ Salomão Luiz de Araújo Neto
 
 Facebook: [Salomao Luiz](https://www.facebook.com/salomao.luiz.28) </br>
 LinkedIn: [Salomao Luiz](https://www.linkedin.com/in/salomao-luiz/) </br>
-Email: [salomao.cruz.15@gmail.com](salomao.cruz.15@gmail.com)
+Email: [salomao.cruz.15@gmail.com](mailto:salomao.cruz.15@gmail.com)
