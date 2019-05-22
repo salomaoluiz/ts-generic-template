@@ -1,4 +1,24 @@
 {
-  "name": "react-native-template-generic-template",
-  "version": "0.0.1"
+  "name": "react-native-template-ts-generic-template",
+  "version": "0.0.2",
+  "description": "Template para a criação de projetos React Native de forma rapida e fácil que seja em Typescript com os pacotes redux-offline, react-native-firebase, react-native-gesture-handler, react-native-paper, react-navigation, react-navigation-redux-helpers, react-redux, redux, redux-saga, typesafe-actions e axios",
+  "author": {
+    "email": "salomao.cruz.15@gmail.com",
+    "name": "Salomão Luiz de Araújo Neto",
+    "url": "https://github.com/salomaoluiz/"
+  },
+  "keywords": [
+    "react-native",
+    "template",
+    "typescript",
+    "redux-offline",
+    "firebase",
+    "react-native-paper",
+    "redux-sagas",
+    "axios"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salomaoluiz/ts-generic-template"
+  }
 }
