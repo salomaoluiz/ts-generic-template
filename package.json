@@ -1,6 +1,6 @@
 {
   "name": "react-native-template-ts-generic-template",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Template para a criação de projetos React Native de forma rapida e fácil que seja em Typescript com os pacotes redux-offline, react-native-firebase, react-native-gesture-handler, react-native-paper, react-navigation, react-navigation-redux-helpers, react-redux, redux, redux-saga, typesafe-actions e axios",
   "author": {
     "email": "salomao.cruz.15@gmail.com",
