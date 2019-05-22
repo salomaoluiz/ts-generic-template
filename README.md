@@ -9,14 +9,46 @@ Para poder compilar sua aplicação em release para a publicação na loja e par
 - Primeiramente abra o CMD ou o Powershell como administrador.
 - Siga para a pasta *C:\Program Files\Java\jdkx.x.x_x\bin*
 - Execute o comando
-<script src="https://gist.github.com/salomaoluiz/995813febbf65cf75dc8a4c8a282c0d0.js"></script>
+```
+keytool -genkeypair -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+```
 - Aqui irá pedir algumas informações e para inserir uma senha, anote essa senha em algum lugar, não à perca por nada.
 - Isso irá criar um arquivo chamado **my-release-key.keystore**
 - Mova o arquivo **my-release-key.keystore** para a pasta *./android/app/*
 - Vá até o arquivo *./android/gradle.properties* e adicione ao final:
-<script src="https://gist.github.com/salomaoluiz/a441dafeae0a0c9e299704ac131738c9.js"></script>
+```
+MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+MYAPP_RELEASE_STORE_PASSWORD=*****
+MYAPP_RELEASE_KEY_PASSWORD=*****
+```
+
 - Agora no arquivo *./android/app/build.gradle* insira as seguintes linhas:
-<script src="https://gist.github.com/salomaoluiz/80b64be09bb89cf7901e054cc5cf4c5c.js"></script>
+```
+...
+android {
+    ...
+    defaultConfig { ... }
+    signingConfigs {
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
+    buildTypes {
+        release {
+            ...
+            signingConfig signingConfigs.release
+        }
+    }
+}
+...
+```
+
 
 Pronto, com isso você tem o projeto configurado para gerar versões release da aplicação, para gerar basta ir na pasta *./android/* e executar o comando *./gradlew assembleRelease* ele irá gerar o apk na pasta *android/app/build/outputs/apk/release/app-release.apk*.
 
@@ -30,7 +62,9 @@ Com a versão release pronta, vamos conectar a aplicação ao Firebase, primeira
 Para facilitar nossa vida, já que será esses comandos do *keytool* será usado muitas vezes, vá até as *configurações do sistema*, em seguida em *Configurações Avançadas do Sistema* clique em *Variáveis de Ambiente*, nas *Variáveis do Sistema* procure por *Path*, selecione-o e clique em editar. Vá em *Novo* e insira o caminho da pasta bin do jdk, por exemplo, *C:\Program Files\Java\jdkx.x.x_x\bin*. Feche todos os prompt de comando e abra-os novamente, agora é possível usar o comando *keytool* a partir de qualquer pasta.
 
 Após feito isso, siga para a pasta *./android/* e execute o comando:
-<script src="https://gist.github.com/salomaoluiz/aefbe93765fcb1ca4851c5d3dbebaf78.js"></script>
+```
+keytool -list -v -keystore ~/.android/app/my-release-key.keystore -alias my-key-alias -storepass android -keypass android 
+```
 
 Substituindo os *android* pela sua senha da keystore que você criou anteriormente. Após isso irá aparecer diversos dados, entre eles a chave SHA1, guarde-a pois usaremos posteriormente.
 
